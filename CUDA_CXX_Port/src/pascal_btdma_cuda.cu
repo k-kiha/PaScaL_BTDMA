@@ -19,6 +19,24 @@ inline std::size_t total_count(const std::vector<int>& values) {
         std::accumulate(values.begin(), values.end(), 0));
 }
 
+double wall_time() {
+    return MPI_Wtime();
+}
+
+void add_elapsed(BtdmaSolveTimings* timings,
+                 double BtdmaSolveTimings::*field,
+                 const double start_time) {
+    if (timings != nullptr) {
+        timings->*field += wall_time() - start_time;
+    }
+}
+
+void sync_for_timing(BtdmaSolveTimings* timings, cudaStream_t stream) {
+    if (timings != nullptr) {
+        PASCAL_BTDMA_CUDA_CHECK(cudaStreamSynchronize(stream));
+    }
+}
+
 __device__ __forceinline__ int lm(const int i, const int j) {
     return i + j * kMaxBlockSize;
 }
@@ -832,6 +850,63 @@ void swap_plan(BtdmaGpuPlan& lhs, BtdmaGpuPlan& rhs) noexcept {
     swap(lhs.created, rhs.created);
 }
 
+void solve_noncyclic_impl(BtdmaGpuPlan& plan,
+                          double* a_dev,
+                          double* b_dev,
+                          double* c_dev,
+                          double* d_dev,
+                          const int m,
+                          const int nsys,
+                          const int nrow,
+                          BtdmaSolveTimings* timings,
+                          cudaStream_t stream) {
+    const double total_start = wall_time();
+
+    if (!plan.created) {
+        throw std::runtime_error("solve_noncyclic called with an uncreated BtdmaGpuPlan");
+    }
+    if (m != plan.m || nsys != plan.nsys || nrow != plan.nrow) {
+        throw std::invalid_argument("solve_noncyclic dimensions do not match the plan");
+    }
+
+    const double local_start = wall_time();
+    btdma_many_modi_kernel<<<plan.blocks, plan.threads, 0, stream>>>(
+        a_dev, b_dev, c_dev, d_dev, plan.rd_a, plan.rd_b, plan.rd_c, plan.rd_d,
+        m, nsys, nrow);
+    PASCAL_BTDMA_CUDA_CHECK(cudaGetLastError());
+    sync_for_timing(timings, stream);
+    add_elapsed(timings, &BtdmaSolveTimings::local_compute, local_start);
+
+    const double forward_start = wall_time();
+    forward_matrix(plan, plan.rd_a, plan.tr_a, stream);
+    forward_matrix(plan, plan.rd_b, plan.tr_b, stream);
+    forward_matrix(plan, plan.rd_c, plan.tr_c, stream);
+    forward_vector(plan, plan.rd_d, plan.tr_d, stream);
+    sync_for_timing(timings, stream);
+    add_elapsed(timings, &BtdmaSolveTimings::forward_exchange, forward_start);
+
+    const double reduced_start = wall_time();
+    const dim3 reduced_blocks(static_cast<unsigned int>(ceil_div(plan.nsys_sub, 64)), 1, 1);
+    btdma_many_kernel<<<reduced_blocks, plan.threads, 0, stream>>>(
+        2 * plan.nprocs, plan.nsys_sub, m, plan.tr_a, plan.tr_b, plan.tr_c, plan.tr_d);
+    PASCAL_BTDMA_CUDA_CHECK(cudaGetLastError());
+    sync_for_timing(timings, stream);
+    add_elapsed(timings, &BtdmaSolveTimings::reduced_compute, reduced_start);
+
+    const double backward_start = wall_time();
+    backward_vector(plan, plan.tr_d, plan.rd_d, stream);
+    sync_for_timing(timings, stream);
+    add_elapsed(timings, &BtdmaSolveTimings::backward_exchange, backward_start);
+
+    const double update_start = wall_time();
+    btdma_many_update_kernel<<<plan.blocks, plan.threads, 0, stream>>>(
+        a_dev, b_dev, c_dev, d_dev, plan.rd_d, m, nsys, nrow);
+    PASCAL_BTDMA_CUDA_CHECK(cudaGetLastError());
+    sync_for_timing(timings, stream);
+    add_elapsed(timings, &BtdmaSolveTimings::update_compute, update_start);
+    add_elapsed(timings, &BtdmaSolveTimings::total, total_start);
+}
+
 }  // namespace
 
 void cuda_check(const cudaError_t status, const char* expr, const char* file, const int line) {
@@ -966,33 +1041,23 @@ void solve_noncyclic(BtdmaGpuPlan& plan,
                      const int nsys,
                      const int nrow,
                      cudaStream_t stream) {
-    if (!plan.created) {
-        throw std::runtime_error("solve_noncyclic called with an uncreated BtdmaGpuPlan");
+    solve_noncyclic_impl(plan, a_dev, b_dev, c_dev, d_dev, m, nsys, nrow, nullptr, stream);
+}
+
+void solve_noncyclic_profiled(BtdmaGpuPlan& plan,
+                              double* a_dev,
+                              double* b_dev,
+                              double* c_dev,
+                              double* d_dev,
+                              const int m,
+                              const int nsys,
+                              const int nrow,
+                              BtdmaSolveTimings* timings,
+                              cudaStream_t stream) {
+    if (timings != nullptr) {
+        *timings = BtdmaSolveTimings{};
     }
-    if (m != plan.m || nsys != plan.nsys || nrow != plan.nrow) {
-        throw std::invalid_argument("solve_noncyclic dimensions do not match the plan");
-    }
-
-    btdma_many_modi_kernel<<<plan.blocks, plan.threads, 0, stream>>>(
-        a_dev, b_dev, c_dev, d_dev, plan.rd_a, plan.rd_b, plan.rd_c, plan.rd_d,
-        m, nsys, nrow);
-    PASCAL_BTDMA_CUDA_CHECK(cudaGetLastError());
-
-    forward_matrix(plan, plan.rd_a, plan.tr_a, stream);
-    forward_matrix(plan, plan.rd_b, plan.tr_b, stream);
-    forward_matrix(plan, plan.rd_c, plan.tr_c, stream);
-    forward_vector(plan, plan.rd_d, plan.tr_d, stream);
-
-    const dim3 reduced_blocks(static_cast<unsigned int>(ceil_div(plan.nsys_sub, 64)), 1, 1);
-    btdma_many_kernel<<<reduced_blocks, plan.threads, 0, stream>>>(
-        2 * plan.nprocs, plan.nsys_sub, m, plan.tr_a, plan.tr_b, plan.tr_c, plan.tr_d);
-    PASCAL_BTDMA_CUDA_CHECK(cudaGetLastError());
-
-    backward_vector(plan, plan.tr_d, plan.rd_d, stream);
-
-    btdma_many_update_kernel<<<plan.blocks, plan.threads, 0, stream>>>(
-        a_dev, b_dev, c_dev, d_dev, plan.rd_d, m, nsys, nrow);
-    PASCAL_BTDMA_CUDA_CHECK(cudaGetLastError());
+    solve_noncyclic_impl(plan, a_dev, b_dev, c_dev, d_dev, m, nsys, nrow, timings, stream);
 }
 
 void solve_cyclic(BtdmaGpuPlan&,

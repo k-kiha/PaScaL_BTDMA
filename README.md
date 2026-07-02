@@ -1,7 +1,9 @@
 # PaScaL_BTDMA
 
 PaScaL_BTDMA is a compact MPI + CUDA Fortran package for solving many block
-tridiagonal systems on distributed-memory NVIDIA GPU systems.
+tridiagonal systems on distributed-memory NVIDIA GPU systems. This checkout is
+organized to compare the original CUDA Fortran implementation with a CUDA C++
+port and a future matched Study workflow.
 
 This cleaned package is intentionally narrow:
 
@@ -11,9 +13,10 @@ This cleaned package is intentionally narrow:
 - BLAS/LAPACK only for the optional CPU example
 
 No SLURM scripts are included. Build the examples with `make`, then run the
-executables with `mpirun` or your site's launcher. The `setup_env.sh` script is
-an example build/run environment helper for the programs under `examples/`; edit
-its module names for your cluster before sourcing it.
+executables with `mpirun` or your site's launcher. The
+`Fortran_Original/setup_env.sh` script is an example build/run environment
+helper for the programs under `Fortran_Original/examples/`; edit its module
+names for your cluster before sourcing it.
 
 ## Program Summary
 
@@ -53,23 +56,38 @@ stability.
 ```text
 PaScaL_BTDMA/
 ├── Makefile
-├── Makefile.inc
-├── setup_env.sh  # example build/run environment helper
-├── src/
-│   ├── mpiutil.f90
-│   ├── mod_cudatools.f90
-│   ├── mod_btdma_cpu.f90
-│   └── mod_btdma_gpu_v2.f90
-├── examples/
-│   ├── btdma_cpu/sample_cpu.f90
-│   ├── btdma_gpu/sample_gpu.f90
-│   ├── heat3d/heat3d_mpi_gpu.f90
-│   ├── euler3d/euler3d_mpi_gpu.f90
-│   └── weno2d/weno_mpi_gpu.f90
-├── include/   # generated module files
-├── build/     # generated object files
-├── lib/       # generated static libraries
-└── run/       # generated executables
+├── README.md
+├── scripts/
+│   └── clean_for_sync.sh
+├── Fortran_Original/
+│   ├── Makefile
+│   ├── Makefile.inc
+│   ├── setup_env.sh
+│   ├── src/
+│   │   ├── mpiutil.f90
+│   │   ├── mod_cudatools.f90
+│   │   ├── mod_btdma_cpu.f90
+│   │   └── mod_btdma_gpu_v2.f90
+│   ├── examples/
+│   │   ├── btdma_cpu/sample_cpu.f90
+│   │   ├── btdma_gpu/sample_gpu.f90
+│   │   ├── heat3d/heat3d_mpi_gpu.f90
+│   │   ├── euler3d/euler3d_mpi_gpu.f90
+│   │   └── weno2d/weno_mpi_gpu.f90
+│   ├── include/   # generated module files
+│   ├── build/     # generated object files
+│   ├── lib/       # generated static libraries
+│   └── run/       # generated executables
+├── CUDA_CXX_Port/
+│   ├── Makefile
+│   ├── PORTING_PLAN.md
+│   ├── README.md
+│   ├── include/
+│   ├── src/
+│   └── examples/
+└── Study/
+    ├── Makefile
+    └── README.md
 ```
 
 ## Build
@@ -78,43 +96,59 @@ Load the NVIDIA environment first. The provided helper is site-specific and may
 need small module-name edits.
 
 ```bash
-source setup_env.sh
+source Fortran_Original/setup_env.sh
 make
 ```
 
-Default `make` builds the CUDA library and the main GPU examples:
+Default root `make` builds the original CUDA Fortran library, the CUDA C++ port
+library, and the current Study build skeleton:
 
 ```text
-lib/libPaScaL_BTDMA_cuda.a
-run/btdma_gpu.out
-run/heat3d.out
-run/euler3d.out
-run/weno2d.out
+Fortran_Original/lib/libPaScaL_BTDMA_cuda.a
+CUDA_CXX_Port/lib/libpascal_btdma_cuda.a
 ```
 
-Optional CPU build:
+Build the original CUDA Fortran GPU examples:
 
 ```bash
-make cpu
+make fortran
 ```
 
 This additionally builds:
 
 ```text
-lib/libPaScaL_BTDMA_cpu.a
-run/btdma_cpu.out
+Fortran_Original/run/btdma_gpu.out
+Fortran_Original/run/heat3d.out
+Fortran_Original/run/euler3d.out
+Fortran_Original/run/weno2d.out
 ```
 
-The CPU solver uses `dgemm` and `dgesv`, so `Makefile.inc` links BLAS/LAPACK.
+Optional original CPU build:
+
+```bash
+make fortran-cpu
+```
+
+This additionally builds:
+
+```text
+Fortran_Original/lib/libPaScaL_BTDMA_cpu.a
+Fortran_Original/run/btdma_cpu.out
+```
+
+The CPU solver uses `dgemm` and `dgesv`, so
+`Fortran_Original/Makefile.inc` links BLAS/LAPACK.
 If your CPU compiler or BLAS/LAPACK setup is different, edit only `FC`,
-`FFLAGS_CPU`, and `LDFLAGS_CPU` in `Makefile.inc`.
+`FFLAGS_CPU`, and `LDFLAGS_CPU` in `Fortran_Original/Makefile.inc`.
 
 ## Useful Targets
 
 ```bash
-make lib          # CUDA library only
-make examples     # GPU examples only
-make cpu          # CPU library and CPU example
+make libs         # original CUDA Fortran and CUDA C++ libraries
+make fortran      # original CUDA Fortran library and GPU examples
+make fortran-cpu  # original CPU library and CPU example
+make cuda-cxx     # CUDA C++ port library and sample
+make study        # Study dependency skeleton
 make clean        # remove build objects
 make veryclean    # remove objects, modules, libraries, and executables
 ```
@@ -122,11 +156,11 @@ make veryclean    # remove objects, modules, libraries, and executables
 Individual examples:
 
 ```bash
-make ex_btdma_gpu
-make ex_heat3d
-make ex_euler3d
-make ex_weno2d
-make ex_btdma_cpu
+make -C Fortran_Original ex_btdma_gpu
+make -C Fortran_Original ex_heat3d
+make -C Fortran_Original ex_euler3d
+make -C Fortran_Original ex_weno2d
+make -C Fortran_Original ex_btdma_cpu
 ```
 
 ## Run
@@ -135,19 +169,19 @@ Use a process count consistent with the decomposition macros used at build time.
 The defaults are small enough for quick checks but still exercise the MPI paths.
 
 ```bash
-mpirun -np 4 ./run/btdma_gpu.out
-mpirun -np 8 ./run/heat3d.out
-mpirun -np 8 ./run/euler3d.out
-mpirun -np 4 ./run/weno2d.out
-mpirun -np 4 ./run/btdma_cpu.out
+mpirun -np 4 ./Fortran_Original/run/btdma_gpu.out
+mpirun -np 8 ./Fortran_Original/run/heat3d.out
+mpirun -np 8 ./Fortran_Original/run/euler3d.out
+mpirun -np 4 ./Fortran_Original/run/weno2d.out
+mpirun -np 4 ./Fortran_Original/run/btdma_cpu.out
 ```
 
 Some examples write VTK or text files into the current working directory. To keep
 outputs separate, run from a dedicated directory:
 
 ```bash
-mkdir -p run/output_weno2d
-cd run/output_weno2d
+mkdir -p Fortran_Original/run/output_weno2d
+cd Fortran_Original/run/output_weno2d
 mpirun -np 4 ../weno2d.out
 ```
 
@@ -156,8 +190,8 @@ mpirun -np 4 ../weno2d.out
 Override the example preprocessor definitions at build time.
 
 ```bash
-make ex_heat3d HEAT3D_DEFS="-DNX_VAL=256 -DNY_VAL=256 -DNZ_VAL=256 -DNP1=2 -DNP2=2 -DNP3=2 -DNRUN=5"
-make ex_weno2d WENO2D_DEFS="-DN1=252 -DN2=252 -DM=3 -DNP1=2 -DNP2=2 -DNRUN=5"
+make -C Fortran_Original ex_heat3d HEAT3D_DEFS="-DNX_VAL=256 -DNY_VAL=256 -DNZ_VAL=256 -DNP1=2 -DNP2=2 -DNP3=2 -DNRUN=5"
+make -C Fortran_Original ex_weno2d WENO2D_DEFS="-DN1=252 -DN2=252 -DM=3 -DNP1=2 -DNP2=2 -DNRUN=5"
 ```
 
 The process count should match the product of the `NP*` macros. For example,

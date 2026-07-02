@@ -1,97 +1,57 @@
-include Makefile.inc
+CUDA_ARCH ?= 90
+FC        = mpifort
+NVCC      ?= nvcc
+MPICXX    ?= mpicxx
 
-.PHONY: all lib lib_gpu lib_cpu examples cpu \
-        ex_btdma_gpu ex_btdma_cpu ex_heat3d ex_euler3d ex_weno2d \
-        dirs clean veryclean help
+FORTRAN_GPU_ARCH ?= cc$(CUDA_ARCH)
 
-all: lib examples
+.PHONY: all libs fortran fortran-lib fortran-examples fortran-cpu \
+        cuda-cxx cuda-cxx-lib cuda-cxx-example study \
+        clean veryclean help
 
-lib: lib_gpu
+all: libs study
 
-examples: ex_btdma_gpu ex_heat3d ex_euler3d ex_weno2d
+libs: fortran-lib cuda-cxx-lib
 
-cpu: lib_cpu ex_btdma_cpu
+fortran: fortran-lib fortran-examples
 
-dirs:
-	mkdir -p $(BUILD_CPU) $(BUILD_GPU) $(INC_CPU) $(INC_GPU) $(LIB_DIR) $(RUN_DIR)
+fortran-lib:
+	$(MAKE) -C Fortran_Original lib FC="$(FC)" GPU_ARCH="$(FORTRAN_GPU_ARCH)"
 
-GPU_OBJS := \
-	$(BUILD_GPU)/mpiutil.o \
-	$(BUILD_GPU)/mod_cudatools.o \
-	$(BUILD_GPU)/mod_btdma_gpu_v2.o
+fortran-examples: fortran-lib
+	$(MAKE) -C Fortran_Original examples FC="$(FC)" GPU_ARCH="$(FORTRAN_GPU_ARCH)"
 
-CPU_OBJS := \
-	$(BUILD_CPU)/mpiutil.o \
-	$(BUILD_CPU)/mod_btdma_cpu.o
+fortran-cpu:
+	$(MAKE) -C Fortran_Original cpu FC="$(FC)" GPU_ARCH="$(FORTRAN_GPU_ARCH)"
 
-lib_gpu: $(CUDA_LIB)
+cuda-cxx: cuda-cxx-lib cuda-cxx-example
 
-lib_cpu: $(CPU_LIB)
+cuda-cxx-lib:
+	$(MAKE) -C CUDA_CXX_Port lib CUDA_ARCH=$(CUDA_ARCH) NVCC="$(NVCC)" MPICXX="$(MPICXX)"
 
-$(CUDA_LIB): $(GPU_OBJS) | dirs
-	$(AR) rcs $@ $(GPU_OBJS)
-	$(RANLIB) $@
+cuda-cxx-example: cuda-cxx-lib
+	$(MAKE) -C CUDA_CXX_Port example CUDA_ARCH=$(CUDA_ARCH) NVCC="$(NVCC)" MPICXX="$(MPICXX)"
 
-$(CPU_LIB): $(CPU_OBJS) | dirs
-	$(AR) rcs $@ $(CPU_OBJS)
-	$(RANLIB) $@
-
-$(BUILD_GPU)/mpiutil.o: $(SRC_DIR)/mpiutil.f90 | dirs
-	$(FC) $(FFLAGS_GPU) -c $< -o $@
-
-$(BUILD_GPU)/mod_cudatools.o: $(SRC_DIR)/mod_cudatools.f90 | dirs
-	$(FC) $(FFLAGS_GPU) -c $< -o $@
-
-$(BUILD_GPU)/mod_btdma_gpu_v2.o: $(SRC_DIR)/mod_btdma_gpu_v2.f90 $(BUILD_GPU)/mod_cudatools.o | dirs
-	$(FC) $(FFLAGS_GPU) -c $< -o $@
-
-$(BUILD_CPU)/mpiutil.o: $(SRC_DIR)/mpiutil.f90 | dirs
-	$(FC) $(FFLAGS_CPU) -c $< -o $@
-
-$(BUILD_CPU)/mod_btdma_cpu.o: $(SRC_DIR)/mod_btdma_cpu.f90 $(BUILD_CPU)/mpiutil.o | dirs
-	$(FC) $(FFLAGS_CPU) -c $< -o $@
-
-ex_btdma_gpu: $(RUN_DIR)/btdma_gpu.out
-
-ex_btdma_cpu: $(RUN_DIR)/btdma_cpu.out
-
-ex_heat3d: $(RUN_DIR)/heat3d.out
-
-ex_euler3d: $(RUN_DIR)/euler3d.out
-
-ex_weno2d: $(RUN_DIR)/weno2d.out
-
-$(RUN_DIR)/btdma_gpu.out: $(EXAMPLE_DIR)/btdma_gpu/sample_gpu.f90 $(CUDA_LIB) | dirs
-	$(FC) $(FFLAGS_GPU) $(BTDMA_GPU_DEFS) -c $< -o $(BUILD_GPU)/sample_gpu.o
-	$(FC) $(LDFLAGS_GPU) $(BUILD_GPU)/sample_gpu.o $(CUDA_LIB) -o $@
-
-$(RUN_DIR)/btdma_cpu.out: $(EXAMPLE_DIR)/btdma_cpu/sample_cpu.f90 $(CPU_LIB) | dirs
-	$(FC) $(FFLAGS_CPU) $(BTDMA_CPU_DEFS) -c $< -o $(BUILD_CPU)/sample_cpu.o
-	$(FC) $(BUILD_CPU)/sample_cpu.o $(CPU_LIB) $(LDFLAGS_CPU) -o $@
-
-$(RUN_DIR)/heat3d.out: $(EXAMPLE_DIR)/heat3d/heat3d_mpi_gpu.f90 $(CUDA_LIB) | dirs
-	$(FC) $(FFLAGS_GPU) $(HEAT3D_DEFS) -c $< -o $(BUILD_GPU)/heat3d_mpi_gpu.o
-	$(FC) $(LDFLAGS_GPU) $(BUILD_GPU)/heat3d_mpi_gpu.o $(CUDA_LIB) -o $@
-
-$(RUN_DIR)/euler3d.out: $(EXAMPLE_DIR)/euler3d/euler3d_mpi_gpu.f90 $(CUDA_LIB) | dirs
-	$(FC) $(FFLAGS_GPU) $(EULER3D_DEFS) -c $< -o $(BUILD_GPU)/euler3d_mpi_gpu.o
-	$(FC) $(LDFLAGS_GPU) $(BUILD_GPU)/euler3d_mpi_gpu.o $(CUDA_LIB) -o $@
-
-$(RUN_DIR)/weno2d.out: $(EXAMPLE_DIR)/weno2d/weno_mpi_gpu.f90 $(CUDA_LIB) | dirs
-	$(FC) $(FFLAGS_GPU) $(WENO2D_DEFS) -c $< -o $(BUILD_GPU)/weno_mpi_gpu.o
-	$(FC) $(LDFLAGS_GPU) $(BUILD_GPU)/weno_mpi_gpu.o $(CUDA_LIB) -o $@
+study: libs
+	$(MAKE) -C Study all CUDA_ARCH=$(CUDA_ARCH) FC="$(FC)" NVCC="$(NVCC)" MPICXX="$(MPICXX)"
 
 clean:
-	rm -rf $(BUILD_DIR)
+	$(MAKE) -C Fortran_Original clean
+	$(MAKE) -C CUDA_CXX_Port clean
+	$(MAKE) -C Study clean
 
-veryclean: clean
-	rm -rf $(INCLUDE_DIR) $(LIB_DIR) $(RUN_DIR)
+veryclean:
+	$(MAKE) -C Fortran_Original veryclean
+	$(MAKE) -C CUDA_CXX_Port veryclean
+	$(MAKE) -C Study veryclean
 
 help:
-	@echo "PaScaL_BTDMA NVIDIA build targets"
-	@echo "  make              build CUDA library and GPU examples"
-	@echo "  make lib          build CUDA library"
-	@echo "  make examples     build GPU examples"
-	@echo "  make cpu          build CPU library and CPU example"
-	@echo "  make clean        remove object files"
-	@echo "  make veryclean    remove objects, modules, libraries, and executables"
+	@echo "PaScaL_BTDMA study-oriented build"
+	@echo "  make all              build Fortran/CUDA C++ libraries and Study skeleton"
+	@echo "  make libs             build only implementation libraries"
+	@echo "  make fortran          build original CUDA Fortran library and GPU examples"
+	@echo "  make fortran-cpu      build original CPU library and CPU example"
+	@echo "  make cuda-cxx         build CUDA C++ port library and sample"
+	@echo "  make study            build Study dependencies"
+	@echo "  make clean            remove intermediate build files"
+	@echo "  make veryclean        remove generated libraries and executables"

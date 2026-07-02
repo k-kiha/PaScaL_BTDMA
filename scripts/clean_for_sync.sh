@@ -16,6 +16,8 @@ Purpose:
 
 Preserved:
   - all *.csv files
+  - Study/btdma_environment_*.txt files
+  - Study/result/ directories and their contents
   - profile_results/ directories and their contents
   - source files, scripts, Makefiles, README files, and git metadata
 USAGE
@@ -56,8 +58,9 @@ clean_generated_files_under() {
     done < <(
         find "$base" \
             -path "$ROOT/.git" -prune -o \
-            -path "$ROOT/porting_c_btdma/profile_results" -prune -o \
+            -path "$ROOT/CUDA_CXX_Port/profile_results" -prune -o \
             -path "$ROOT/profile_results" -prune -o \
+            -path "$ROOT/Study/result" -prune -o \
             -type f \( \
                 -name '*.o' -o \
                 -name '*.mod' -o \
@@ -110,9 +113,16 @@ remove_tree_or_clean_contents() {
 remove_tree_or_clean_contents "$ROOT/build"
 remove_tree_or_clean_contents "$ROOT/include"
 remove_tree_or_clean_contents "$ROOT/lib"
-remove_tree_or_clean_contents "$ROOT/porting_c_btdma/build"
-remove_tree_or_clean_contents "$ROOT/porting_c_btdma/lib"
-remove_path "$ROOT/porting_c_btdma/run/ex_btdma_noncyclic"
+remove_tree_or_clean_contents "$ROOT/Fortran_Original/build"
+remove_tree_or_clean_contents "$ROOT/Fortran_Original/include"
+remove_tree_or_clean_contents "$ROOT/Fortran_Original/lib"
+remove_tree_or_clean_contents "$ROOT/Fortran_Original/run"
+remove_tree_or_clean_contents "$ROOT/CUDA_CXX_Port/build"
+remove_tree_or_clean_contents "$ROOT/CUDA_CXX_Port/lib"
+remove_path "$ROOT/CUDA_CXX_Port/run/ex_btdma_noncyclic"
+remove_path "$ROOT/Study/example_fortran_btdma_profile"
+remove_path "$ROOT/Study/example_cuda_cxx_btdma_profile"
+remove_path "$ROOT/Study/.example_fortran_btdma_profile.o"
 clean_generated_files_under "$ROOT"
 
 if [[ "$DRY_RUN" -eq 1 ]]; then

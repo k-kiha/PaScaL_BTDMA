@@ -35,6 +35,15 @@ module mod_btdma_gpu_v2
         type(a2a_plan) :: commM,commV
     end type BTDMA_PLAN_gpu_v2
 
+    type, public :: BTDMA_TIMING_gpu_v2
+        real*8 :: total = 0.d0
+        real*8 :: local_compute = 0.d0
+        real*8 :: forward_exchange = 0.d0
+        real*8 :: reduced_compute = 0.d0
+        real*8 :: backward_exchange = 0.d0
+        real*8 :: update_compute = 0.d0
+    end type BTDMA_TIMING_gpu_v2
+
     real*8 :: t0__a=0.d0,t0__b=0.d0
     real*8 :: t1__a=0.d0,t1__b=0.d0
     real*8 :: t2__a=0.d0,t2__b=0.d0
@@ -45,6 +54,18 @@ module mod_btdma_gpu_v2
     real*8 :: comm__tc__a=0.d0,comm__tc__b=0.d0
     real*8 :: comm__tu__a=0.d0,comm__tu__b=0.d0
 contains
+
+    subroutine btdma_timing_reset_gpu_v2(timing)
+        implicit none
+        type(BTDMA_TIMING_gpu_v2), intent(out) :: timing
+
+        timing%total = 0.d0
+        timing%local_compute = 0.d0
+        timing%forward_exchange = 0.d0
+        timing%reduced_compute = 0.d0
+        timing%backward_exchange = 0.d0
+        timing%update_compute = 0.d0
+    end subroutine btdma_timing_reset_gpu_v2
 
     subroutine btdma_makeplan_gpu_v2(plan,m,nsys,nrow_sub,comm)
         use mpi
@@ -144,6 +165,37 @@ contains
         call btdma_timecheck(t5__a,t5__b,1)
                 
     end subroutine btdma_many_mpi_gpu_v2
+
+    subroutine btdma_many_mpi_gpu_v2_profiled(A,B,C,D,m,nsys,nrow_sub,plan,timing)
+        implicit none
+        type(BTDMA_PLAN_gpu_v2) :: plan
+        type(BTDMA_TIMING_gpu_v2), intent(out) :: timing
+        integer, intent(in) :: m,nsys,nrow_sub
+        real*8, device :: A(1:nsys,1:nrow_sub,1:m,1:m)
+        real*8, device :: B(1:nsys,1:nrow_sub,1:m,1:m)
+        real*8, device :: C(1:nsys,1:nrow_sub,1:m,1:m)
+        real*8, device :: D(1:nsys,1:nrow_sub,1:m    )
+
+        call btdma_timing_reset_gpu_v2(timing)
+
+        t0__a=0.d0; t0__b=0.d0
+        t1__a=0.d0; t1__b=0.d0
+        t2__a=0.d0; t2__b=0.d0
+        t3__a=0.d0; t3__b=0.d0
+        t4__a=0.d0; t4__b=0.d0
+        t5__a=0.d0; t5__b=0.d0
+
+        call btdma_timecheck(t0__a,t0__b,0)
+        call btdma_many_mpi_gpu_v2(A,B,C,D,m,nsys,nrow_sub,plan)
+        call btdma_timecheck(t0__a,t0__b,1)
+
+        timing%total = t0__b
+        timing%local_compute = t1__b
+        timing%forward_exchange = t2__b
+        timing%reduced_compute = t3__b
+        timing%backward_exchange = t4__b
+        timing%update_compute = t5__b
+    end subroutine btdma_many_mpi_gpu_v2_profiled
 
     subroutine btdma_many_cycl_mpi_gpu_v2(A,B,C,D,m,nsys,nrow_sub,plan)
         use mpi

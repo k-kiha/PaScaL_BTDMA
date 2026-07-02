@@ -1,7 +1,7 @@
 # PaScaL_BTDMA CUDA C++ Porting Plan
 
 date: 2026-06-30
-source: `../src/mod_btdma_gpu_v2.f90`
+source: `../Fortran_Original/src/mod_btdma_gpu_v2.f90`
 reference report: `../../brain/4_260630_PaScaL_BTDMA_analysis.md`
 
 ## 1. Porting 기준

@@ -21,6 +21,23 @@ struct CudaError : public std::runtime_error {
     explicit CudaError(const std::string& message) : std::runtime_error(message) {}
 };
 
+struct BtdmaSolveTimings {
+    double total = 0.0;
+    double local_compute = 0.0;
+    double forward_exchange = 0.0;
+    double reduced_compute = 0.0;
+    double backward_exchange = 0.0;
+    double update_compute = 0.0;
+
+    double computation() const {
+        return local_compute + reduced_compute + update_compute;
+    }
+
+    double communication() const {
+        return forward_exchange + backward_exchange;
+    }
+};
+
 void cuda_check(cudaError_t status, const char* expr, const char* file, int line);
 
 #define PASCAL_BTDMA_CUDA_CHECK(expr) \
@@ -126,6 +143,17 @@ void solve_noncyclic(BtdmaGpuPlan& plan,
                      int nsys,
                      int nrow,
                      cudaStream_t stream = nullptr);
+
+void solve_noncyclic_profiled(BtdmaGpuPlan& plan,
+                              double* a_dev,
+                              double* b_dev,
+                              double* c_dev,
+                              double* d_dev,
+                              int m,
+                              int nsys,
+                              int nrow,
+                              BtdmaSolveTimings* timings,
+                              cudaStream_t stream = nullptr);
 
 void solve_cyclic(BtdmaGpuPlan& plan,
                   double* a_dev,

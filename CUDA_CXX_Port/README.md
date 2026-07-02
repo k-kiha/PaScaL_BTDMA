@@ -1,7 +1,7 @@
 # PaScaL_BTDMA CUDA C++ Port
 
 This directory is a first-pass CUDA C++ port of the non-cyclic GPU path in
-`../src/mod_btdma_gpu_v2.f90`.
+`../Fortran_Original/src/mod_btdma_gpu_v2.f90`.
 
 ## Scope
 
