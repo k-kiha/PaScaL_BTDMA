@@ -1,0 +1,32 @@
+The case matrix requested Fortran and CUDA C++ device runs for 28 base cases, plus 3 CUDA C++ host-fallback runs. The actual timing CSV contains CUDA C++ rows only.
+
+| case | implementation | mode | np | grid | m | observed |
+| --- | --- | --- | --- | --- | --- | --- |
+| sgref_np1_32x32x128_m2_device | fortran-original | device | 1 | 32x32x128 | 2 | no |
+| sgref_np1_32x32x128_m3_device | fortran-original | device | 1 | 32x32x128 | 3 | no |
+| sgref_np1_32x32x128_m5_device | fortran-original | device | 1 | 32x32x128 | 5 | no |
+| sgref_np1_32x32x128_m8_device | fortran-original | device | 1 | 32x32x128 | 8 | no |
+| strong_np2_64x64x2048_m2_device | fortran-original | device | 2 | 64x64x2048 | 2 | no |
+| strong_np4_64x64x2048_m2_device | fortran-original | device | 4 | 64x64x2048 | 2 | no |
+| strong_np8_64x64x2048_m2_device | fortran-original | device | 8 | 64x64x2048 | 2 | no |
+| strong_np2_64x64x2048_m3_device | fortran-original | device | 2 | 64x64x2048 | 3 | no |
+| strong_np4_64x64x2048_m3_device | fortran-original | device | 4 | 64x64x2048 | 3 | no |
+| strong_np8_64x64x2048_m3_device | fortran-original | device | 8 | 64x64x2048 | 3 | no |
+| strong_np2_64x64x2048_m5_device | fortran-original | device | 2 | 64x64x2048 | 5 | no |
+| strong_np4_64x64x2048_m5_device | fortran-original | device | 4 | 64x64x2048 | 5 | no |
+| strong_np8_64x64x2048_m5_device | fortran-original | device | 8 | 64x64x2048 | 5 | no |
+| strong_np2_64x64x2048_m8_device | fortran-original | device | 2 | 64x64x2048 | 8 | no |
+| strong_np4_64x64x2048_m8_device | fortran-original | device | 4 | 64x64x2048 | 8 | no |
+| strong_np8_64x64x2048_m8_device | fortran-original | device | 8 | 64x64x2048 | 8 | no |
+| weak_nrow_np2_64x64x1024_m2_device | fortran-original | device | 2 | 64x64x1024 | 2 | no |
+| weak_nrow_np8_64x64x4096_m2_device | fortran-original | device | 8 | 64x64x4096 | 2 | no |
+| weak_nrow_np2_64x64x1024_m5_device | fortran-original | device | 2 | 64x64x1024 | 5 | no |
+| weak_nrow_np8_64x64x4096_m5_device | fortran-original | device | 8 | 64x64x4096 | 5 | no |
+| weak_nrow_np2_64x64x1024_m8_device | fortran-original | device | 2 | 64x64x1024 | 8 | no |
+| weak_nrow_np8_64x64x4096_m8_device | fortran-original | device | 8 | 64x64x4096 | 8 | no |
+| nsys_np8_32x32x2048_m2_device | fortran-original | device | 8 | 32x32x2048 | 2 | no |
+| nsys_np8_128x128x2048_m2_device | fortran-original | device | 8 | 128x128x2048 | 2 | no |
+| nsys_np8_32x32x2048_m5_device | fortran-original | device | 8 | 32x32x2048 | 5 | no |
+| nsys_np8_128x128x2048_m5_device | fortran-original | device | 8 | 128x128x2048 | 5 | no |
+| nsys_np8_32x32x2048_m8_device | fortran-original | device | 8 | 32x32x2048 | 8 | no |
+| nsys_np8_128x128x2048_m8_device | fortran-original | device | 8 | 128x128x2048 | 8 | no |

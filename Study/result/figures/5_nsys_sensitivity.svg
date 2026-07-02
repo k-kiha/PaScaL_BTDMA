@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="540" viewBox="0 0 920 540">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<style>
+text{font-family:Arial,Helvetica,sans-serif;fill:#1f2933}
+.title{font-size:18px;font-weight:700}
+.axis{stroke:#52606d;stroke-width:1}
+.grid{stroke:#d9e2ec;stroke-width:1}
+.tick{font-size:11px;fill:#52606d}
+.label{font-size:12px;fill:#334e68}
+.point-label{font-size:11px;fill:#243b53;font-weight:600}
+.legend{font-size:12px;fill:#243b53}
+</style>
+<text x="460.0" y="28" text-anchor="middle" class="title">Nsys Sensitivity at np=8</text>
+<line x1="94" y1="448" x2="886" y2="448" class="axis"/>
+<line x1="94" y1="62" x2="94" y2="448" class="axis"/>
+<line x1="123.9" y1="62" x2="123.9" y2="448" class="grid"/>
+<line x1="123.9" y1="448" x2="123.9" y2="453" class="axis"/>
+<text x="123.9" y="471" text-anchor="middle" class="tick">1024</text>
+<line x1="490.0" y1="62" x2="490.0" y2="448" class="grid"/>
+<line x1="490.0" y1="448" x2="490.0" y2="453" class="axis"/>
+<text x="490.0" y="471" text-anchor="middle" class="tick">4096</text>
+<line x1="856.1" y1="62" x2="856.1" y2="448" class="grid"/>
+<line x1="856.1" y1="448" x2="856.1" y2="453" class="axis"/>
+<text x="856.1" y="471" text-anchor="middle" class="tick">16384</text>
+<line x1="94" y1="448.0" x2="886" y2="448.0" class="grid"/>
+<text x="86" y="452.0" text-anchor="end" class="tick">4.07718</text>
+<line x1="94" y1="423.4" x2="886" y2="423.4" class="grid"/>
+<text x="86" y="427.4" text-anchor="end" class="tick">5</text>
+<line x1="94" y1="339.8" x2="886" y2="339.8" class="grid"/>
+<text x="86" y="343.8" text-anchor="end" class="tick">10</text>
+<line x1="94" y1="256.1" x2="886" y2="256.1" class="grid"/>
+<text x="86" y="260.1" text-anchor="end" class="tick">20</text>
+<line x1="94" y1="145.6" x2="886" y2="145.6" class="grid"/>
+<text x="86" y="149.6" text-anchor="end" class="tick">50</text>
+<line x1="94" y1="62.0" x2="886" y2="62.0" class="grid"/>
+<text x="86" y="66.0" text-anchor="end" class="tick">100</text>
+<text x="490.0" y="526" text-anchor="middle" class="label">nsys = n1*n2 (log scale)</text>
+<text x="16" y="255.0" text-anchor="middle" class="label" transform="rotate(-90 16 255.0)">total_s_max mean (ms) (log scale)</text>
+<polyline points="123.9,428.0 490.0,401.9 856.1,390.3" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+<circle cx="123.9" cy="428.0" r="4" fill="#2563eb"/>
+<circle cx="490.0" cy="401.9" r="4" fill="#2563eb"/>
+<circle cx="856.1" cy="390.3" r="4" fill="#2563eb"/>
+<line x1="102" y1="75" x2="118" y2="75" stroke="#2563eb" stroke-width="2.5"/>
+<text x="124" y="80" class="legend">m=2</text>
+<polyline points="123.9,226.3 490.0,221.6 856.1,207.6" fill="none" stroke="#ea580c" stroke-width="2.5"/>
+<circle cx="123.9" cy="226.3" r="4" fill="#ea580c"/>
+<circle cx="490.0" cy="221.6" r="4" fill="#ea580c"/>
+<circle cx="856.1" cy="207.6" r="4" fill="#ea580c"/>
+<line x1="102" y1="95" x2="118" y2="95" stroke="#ea580c" stroke-width="2.5"/>
+<text x="124" y="100" class="legend">m=5</text>
+<polyline points="123.9,122.7 490.0,120.4 856.1,82.0" fill="none" stroke="#7c3aed" stroke-width="2.5"/>
+<circle cx="123.9" cy="122.7" r="4" fill="#7c3aed"/>
+<circle cx="490.0" cy="120.4" r="4" fill="#7c3aed"/>
+<circle cx="856.1" cy="82.0" r="4" fill="#7c3aed"/>
+<line x1="102" y1="115" x2="118" y2="115" stroke="#7c3aed" stroke-width="2.5"/>
+<text x="124" y="120" class="legend">m=8</text>
+</svg>

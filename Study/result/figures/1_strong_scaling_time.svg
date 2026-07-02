@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="540" viewBox="0 0 920 540">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<style>
+text{font-family:Arial,Helvetica,sans-serif;fill:#1f2933}
+.title{font-size:18px;font-weight:700}
+.axis{stroke:#52606d;stroke-width:1}
+.grid{stroke:#d9e2ec;stroke-width:1}
+.tick{font-size:11px;fill:#52606d}
+.label{font-size:12px;fill:#334e68}
+.point-label{font-size:11px;fill:#243b53;font-weight:600}
+.legend{font-size:12px;fill:#243b53}
+</style>
+<text x="460.0" y="28" text-anchor="middle" class="title">Strong Scaling by Block Size</text>
+<line x1="94" y1="448" x2="886" y2="448" class="axis"/>
+<line x1="94" y1="62" x2="94" y2="448" class="axis"/>
+<line x1="149.6" y1="62" x2="149.6" y2="448" class="grid"/>
+<line x1="149.6" y1="448" x2="149.6" y2="453" class="axis"/>
+<text x="149.6" y="471" text-anchor="middle" class="tick">2</text>
+<line x1="490.0" y1="62" x2="490.0" y2="448" class="grid"/>
+<line x1="490.0" y1="448" x2="490.0" y2="453" class="axis"/>
+<text x="490.0" y="471" text-anchor="middle" class="tick">4</text>
+<line x1="830.4" y1="62" x2="830.4" y2="448" class="grid"/>
+<line x1="830.4" y1="448" x2="830.4" y2="453" class="axis"/>
+<text x="830.4" y="471" text-anchor="middle" class="tick">8</text>
+<line x1="94" y1="448.0" x2="886" y2="448.0" class="grid"/>
+<text x="86" y="452.0" text-anchor="end" class="tick">4.84174</text>
+<line x1="94" y1="445.0" x2="886" y2="445.0" class="grid"/>
+<text x="86" y="449.0" text-anchor="end" class="tick">5</text>
+<line x1="94" y1="379.3" x2="886" y2="379.3" class="grid"/>
+<text x="86" y="383.3" text-anchor="end" class="tick">10</text>
+<line x1="94" y1="313.6" x2="886" y2="313.6" class="grid"/>
+<text x="86" y="317.6" text-anchor="end" class="tick">20</text>
+<line x1="94" y1="226.7" x2="886" y2="226.7" class="grid"/>
+<text x="86" y="230.7" text-anchor="end" class="tick">50</text>
+<line x1="94" y1="161.0" x2="886" y2="161.0" class="grid"/>
+<text x="86" y="165.0" text-anchor="end" class="tick">100</text>
+<line x1="94" y1="95.3" x2="886" y2="95.3" class="grid"/>
+<text x="86" y="99.3" text-anchor="end" class="tick">200</text>
+<line x1="94" y1="62.0" x2="886" y2="62.0" class="grid"/>
+<text x="86" y="66.0" text-anchor="end" class="tick">284</text>
+<text x="490.0" y="526" text-anchor="middle" class="label">MPI ranks / GPUs (log scale)</text>
+<text x="16" y="255.0" text-anchor="middle" class="label" transform="rotate(-90 16 255.0)">total_s_max mean (ms) (log scale)</text>
+<polyline points="149.6,300.9 490.0,366.4 830.4,428.1" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+<circle cx="149.6" cy="300.9" r="4" fill="#2563eb"/>
+<circle cx="490.0" cy="366.4" r="4" fill="#2563eb"/>
+<circle cx="830.4" cy="428.1" r="4" fill="#2563eb"/>
+<text x="156.6" y="293.9" class="point-label">100%</text>
+<text x="497.0" y="359.4" class="point-label">100%</text>
+<text x="837.4" y="421.1" class="point-label">96%</text>
+<line x1="102" y1="75" x2="118" y2="75" stroke="#2563eb" stroke-width="2.5"/>
+<text x="124" y="80" class="legend">m=2</text>
+<polyline points="149.6,300.9 490.0,366.6 830.4,432.3" fill="none" stroke="#2563eb" stroke-width="2" stroke-dasharray="7 5" opacity="0.42"/>
+<line x1="102" y1="95" x2="118" y2="95" stroke="#2563eb" stroke-width="2" stroke-dasharray="7 5" opacity="0.42"/>
+<text x="124" y="100" class="legend">m=2 ideal</text>
+<polyline points="149.6,243.7 490.0,308.3 830.4,371.0" fill="none" stroke="#16a34a" stroke-width="2.5"/>
+<circle cx="149.6" cy="243.7" r="4" fill="#16a34a"/>
+<circle cx="490.0" cy="308.3" r="4" fill="#16a34a"/>
+<circle cx="830.4" cy="371.0" r="4" fill="#16a34a"/>
+<text x="156.6" y="236.7" class="point-label">100%</text>
+<text x="497.0" y="301.3" class="point-label">99%</text>
+<text x="837.4" y="364.0" class="point-label">96%</text>
+<line x1="102" y1="115" x2="118" y2="115" stroke="#16a34a" stroke-width="2.5"/>
+<text x="124" y="120" class="legend">m=3</text>
+<polyline points="149.6,243.7 490.0,309.4 830.4,375.1" fill="none" stroke="#16a34a" stroke-width="2" stroke-dasharray="7 5" opacity="0.42"/>
+<line x1="102" y1="135" x2="118" y2="135" stroke="#16a34a" stroke-width="2" stroke-dasharray="7 5" opacity="0.42"/>
+<text x="124" y="140" class="legend">m=3 ideal</text>
+<polyline points="149.6,159.1 490.0,223.7 830.4,286.4" fill="none" stroke="#ea580c" stroke-width="2.5"/>
+<circle cx="149.6" cy="159.1" r="4" fill="#ea580c"/>
+<circle cx="490.0" cy="223.7" r="4" fill="#ea580c"/>
+<circle cx="830.4" cy="286.4" r="4" fill="#ea580c"/>
+<text x="156.6" y="152.1" class="point-label">100%</text>
+<text x="497.0" y="216.7" class="point-label">99%</text>
+<text x="837.4" y="279.4" class="point-label">96%</text>
+<line x1="102" y1="155" x2="118" y2="155" stroke="#ea580c" stroke-width="2.5"/>
+<text x="124" y="160" class="legend">m=5</text>
+<polyline points="149.6,159.1 490.0,224.8 830.4,290.5" fill="none" stroke="#ea580c" stroke-width="2" stroke-dasharray="7 5" opacity="0.42"/>
+<line x1="102" y1="175" x2="118" y2="175" stroke="#ea580c" stroke-width="2" stroke-dasharray="7 5" opacity="0.42"/>
+<text x="124" y="180" class="legend">m=5 ideal</text>
+<polyline points="149.6,77.7 490.0,143.0 830.4,207.0" fill="none" stroke="#7c3aed" stroke-width="2.5"/>
+<circle cx="149.6" cy="77.7" r="4" fill="#7c3aed"/>
+<circle cx="490.0" cy="143.0" r="4" fill="#7c3aed"/>
+<circle cx="830.4" cy="207.0" r="4" fill="#7c3aed"/>
+<text x="156.6" y="70.7" class="point-label">100%</text>
+<text x="497.0" y="136.0" class="point-label">100%</text>
+<text x="837.4" y="200.0" class="point-label">98%</text>
+<line x1="102" y1="195" x2="118" y2="195" stroke="#7c3aed" stroke-width="2.5"/>
+<text x="124" y="200" class="legend">m=8</text>
+<polyline points="149.6,77.7 490.0,143.4 830.4,209.1" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="7 5" opacity="0.42"/>
+<line x1="102" y1="215" x2="118" y2="215" stroke="#7c3aed" stroke-width="2" stroke-dasharray="7 5" opacity="0.42"/>
+<text x="124" y="220" class="legend">m=8 ideal</text>
+</svg>

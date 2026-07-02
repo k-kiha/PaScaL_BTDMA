@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="540" viewBox="0 0 920 540">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<style>
+text{font-family:Arial,Helvetica,sans-serif;fill:#1f2933}
+.title{font-size:18px;font-weight:700}
+.axis{stroke:#52606d;stroke-width:1}
+.grid{stroke:#d9e2ec;stroke-width:1}
+.tick{font-size:11px;fill:#52606d}
+.label{font-size:12px;fill:#334e68}
+.point-label{font-size:11px;fill:#243b53;font-weight:600}
+.legend{font-size:12px;fill:#243b53}
+</style>
+<text x="460.0" y="28" text-anchor="middle" class="title">Weak Nrow Scaling</text>
+<line x1="94" y1="448" x2="886" y2="448" class="axis"/>
+<line x1="94" y1="62" x2="94" y2="448" class="axis"/>
+<line x1="149.6" y1="62" x2="149.6" y2="448" class="grid"/>
+<line x1="149.6" y1="448" x2="149.6" y2="453" class="axis"/>
+<text x="149.6" y="471" text-anchor="middle" class="tick">2</text>
+<line x1="490.0" y1="62" x2="490.0" y2="448" class="grid"/>
+<line x1="490.0" y1="448" x2="490.0" y2="453" class="axis"/>
+<text x="490.0" y="471" text-anchor="middle" class="tick">4</text>
+<line x1="830.4" y1="62" x2="830.4" y2="448" class="grid"/>
+<line x1="830.4" y1="448" x2="830.4" y2="453" class="axis"/>
+<text x="830.4" y="471" text-anchor="middle" class="tick">8</text>
+<line x1="94" y1="448.0" x2="886" y2="448.0" class="grid"/>
+<text x="86" y="452.0" text-anchor="end" class="tick">9.57014</text>
+<line x1="94" y1="441.8" x2="886" y2="441.8" class="grid"/>
+<text x="86" y="445.8" text-anchor="end" class="tick">10</text>
+<line x1="94" y1="343.2" x2="886" y2="343.2" class="grid"/>
+<text x="86" y="347.2" text-anchor="end" class="tick">20</text>
+<line x1="94" y1="212.9" x2="886" y2="212.9" class="grid"/>
+<text x="86" y="216.9" text-anchor="end" class="tick">50</text>
+<line x1="94" y1="114.3" x2="886" y2="114.3" class="grid"/>
+<text x="86" y="118.3" text-anchor="end" class="tick">100</text>
+<line x1="94" y1="62.0" x2="886" y2="62.0" class="grid"/>
+<text x="86" y="66.0" text-anchor="end" class="tick">144</text>
+<text x="490.0" y="526" text-anchor="middle" class="label">MPI ranks / GPUs (log scale)</text>
+<text x="16" y="255.0" text-anchor="middle" class="label" transform="rotate(-90 16 255.0)">total_s_max mean (ms) (log scale)</text>
+<polyline points="149.6,424.5 490.0,422.4 830.4,418.4" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+<circle cx="149.6" cy="424.5" r="4" fill="#2563eb"/>
+<circle cx="490.0" cy="422.4" r="4" fill="#2563eb"/>
+<circle cx="830.4" cy="418.4" r="4" fill="#2563eb"/>
+<text x="156.6" y="417.5" class="point-label">100%</text>
+<text x="497.0" y="415.4" class="point-label">99%</text>
+<text x="837.4" y="411.4" class="point-label">96%</text>
+<line x1="102" y1="75" x2="118" y2="75" stroke="#2563eb" stroke-width="2.5"/>
+<text x="124" y="80" class="legend">m=2</text>
+<polyline points="149.6,424.5 490.0,424.5 830.4,424.5" fill="none" stroke="#2563eb" stroke-width="2" stroke-dasharray="7 5" opacity="0.42"/>
+<line x1="102" y1="95" x2="118" y2="95" stroke="#2563eb" stroke-width="2" stroke-dasharray="7 5" opacity="0.42"/>
+<text x="124" y="100" class="legend">m=2 ideal</text>
+<polyline points="149.6,209.4 490.0,208.3 830.4,206.9" fill="none" stroke="#ea580c" stroke-width="2.5"/>
+<circle cx="149.6" cy="209.4" r="4" fill="#ea580c"/>
+<circle cx="490.0" cy="208.3" r="4" fill="#ea580c"/>
+<circle cx="830.4" cy="206.9" r="4" fill="#ea580c"/>
+<text x="156.6" y="202.4" class="point-label">100%</text>
+<text x="497.0" y="201.3" class="point-label">99%</text>
+<text x="837.4" y="199.9" class="point-label">98%</text>
+<line x1="102" y1="115" x2="118" y2="115" stroke="#ea580c" stroke-width="2.5"/>
+<text x="124" y="120" class="legend">m=5</text>
+<polyline points="149.6,209.4 490.0,209.4 830.4,209.4" fill="none" stroke="#ea580c" stroke-width="2" stroke-dasharray="7 5" opacity="0.42"/>
+<line x1="102" y1="135" x2="118" y2="135" stroke="#ea580c" stroke-width="2" stroke-dasharray="7 5" opacity="0.42"/>
+<text x="124" y="140" class="legend">m=5 ideal</text>
+<polyline points="149.6,89.0 490.0,87.2 830.4,85.5" fill="none" stroke="#7c3aed" stroke-width="2.5"/>
+<circle cx="149.6" cy="89.0" r="4" fill="#7c3aed"/>
+<circle cx="490.0" cy="87.2" r="4" fill="#7c3aed"/>
+<circle cx="830.4" cy="85.5" r="4" fill="#7c3aed"/>
+<text x="156.6" y="82.0" class="point-label">100%</text>
+<text x="497.0" y="80.2" class="point-label">99%</text>
+<text x="837.4" y="78.5" class="point-label">98%</text>
+<line x1="102" y1="155" x2="118" y2="155" stroke="#7c3aed" stroke-width="2.5"/>
+<text x="124" y="160" class="legend">m=8</text>
+<polyline points="149.6,89.0 490.0,89.0 830.4,89.0" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="7 5" opacity="0.42"/>
+<line x1="102" y1="175" x2="118" y2="175" stroke="#7c3aed" stroke-width="2" stroke-dasharray="7 5" opacity="0.42"/>
+<text x="124" y="180" class="legend">m=8 ideal</text>
+</svg>

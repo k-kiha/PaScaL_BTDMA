@@ -269,6 +269,7 @@ sort -u "$EXEC_CASES" | while IFS=, read -r implementation mode np n1 n2 n3 m; d
         fi
         PASCAL_BTDMA_SIGNATURE_OUT="$SIGNATURE_OUT" \
         "$MPIRUN" -np "$np" "$FORTRAN_EXE" "$n1" "$n2" "$n3" "$m" "$ITERATIONS" \
+            < /dev/null \
             | append_timing_csv
     elif [[ "$implementation" == "cuda-cxx" ]]; then
         if [[ "$DRY_RUN" == "1" ]]; then
@@ -278,6 +279,7 @@ sort -u "$EXEC_CASES" | while IFS=, read -r implementation mode np n1 n2 n3 m; d
         PASCAL_BTDMA_SIGNATURE_OUT="$SIGNATURE_OUT" \
         PASCAL_BTDMA_MPI_MODE="$mode" \
         "$MPIRUN" -np "$np" "$CXX_EXE" "$n1" "$n2" "$n3" "$m" "$ITERATIONS" \
+            < /dev/null \
             | append_timing_csv
     else
         echo "error: unknown implementation=$implementation" >&2
