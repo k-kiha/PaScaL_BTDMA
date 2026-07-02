@@ -1,0 +1,150 @@
+# PaScaL_BTDMA Study Environment
+date=2026-07-02T19:34:44+0900
+hostname=gpu56
+pwd=/scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study
+root_dir=/scratch/paop45a01/02_F2C/PaScaL_BTDMA
+script_dir=/scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study
+study_preset=custom
+baseline_np=2
+scaling_np_list=2 4 8
+custom_np_list=8
+custom_size_list=128,128,2048
+custom_m_list=2
+iterations=10
+cxx_default_mpi_modes=device
+mpi_mode_list=device host
+run_fortran=1
+run_cxx=1
+dry_run=0
+cuda_visible_devices=0,1,2,3,4,5,6,7
+timing_csv=/scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193138.csv
+signature_csv=/scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193138.csv
+environment_file=/scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193138_case_files/24_nsys_np8_128x128x2048_m2_device_environment.txt
+case_manifest=/scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193138_case_files/24_nsys_np8_128x128x2048_m2_device_manifest.csv
+
+## git
+1a0c4f37be420e799d9efafa788e344a6da0baf8
+?? CUDA_CXX_Port/build/
+?? CUDA_CXX_Port/lib/
+?? Fortran_Original/build/
+?? Fortran_Original/include/
+?? Fortran_Original/lib/
+?? Study/example_cuda_cxx_btdma_profile
+?? Study/example_fortran_btdma_profile
+?? Study/result/btdma_environment_260702_193014.txt
+?? Study/result/btdma_environment_260702_193138.txt
+?? Study/result/btdma_full_case_list_260702_193014.csv
+?? Study/result/btdma_full_case_list_260702_193138.csv
+?? Study/result/btdma_full_study_260702_193014.log
+?? Study/result/btdma_full_study_260702_193014_case_files/
+?? Study/result/btdma_full_study_260702_193138.log
+?? Study/result/btdma_full_study_260702_193138_case_files/
+?? Study/result/btdma_solution_signature_260702_193138.csv
+?? Study/result/btdma_total_profile_260702_193138.csv
+
+## nvidia-smi
+Thu Jul  2 19:34:44 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.105.08             Driver Version: 580.105.08     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H200                    On  |   00000000:04:00.0 Off |                    0 |
+| N/A   31C    P0            112W /  700W |       0MiB / 143771MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA H200                    On  |   00000000:14:00.0 Off |                    0 |
+| N/A   34C    P0            105W /  700W |       0MiB / 143771MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+|   2  NVIDIA H200                    On  |   00000000:64:00.0 Off |                    0 |
+| N/A   35C    P0            122W /  700W |       0MiB / 143771MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+|   3  NVIDIA H200                    On  |   00000000:77:00.0 Off |                    0 |
+| N/A   33C    P0            124W /  700W |       0MiB / 143771MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+|   4  NVIDIA H200                    On  |   00000000:84:00.0 Off |                    0 |
+| N/A   32C    P0            121W /  700W |       0MiB / 143771MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+|   5  NVIDIA H200                    On  |   00000000:94:00.0 Off |                    0 |
+| N/A   35C    P0            125W /  700W |       0MiB / 143771MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+|   6  NVIDIA H200                    On  |   00000000:E9:00.0 Off |                    0 |
+| N/A   32C    P0            115W /  700W |       0MiB / 143771MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+|   7  NVIDIA H200                    On  |   00000000:F6:00.0 Off |                    0 |
+| N/A   35C    P0            116W /  700W |       0MiB / 143771MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+## nvidia-smi topo -m
+	[4mGPU0	GPU1	GPU2	GPU3	GPU4	GPU5	GPU6	GPU7	NIC0	NIC1	NIC2	NIC3	CPU Affinity	NUMA Affinity	GPU NUMA ID[0m
+GPU0	 X 	NV18	NV18	NV18	NV18	NV18	NV18	NV18	NODE	PIX	SYS	SYS	0-31	0		N/A
+GPU1	NV18	 X 	NV18	NV18	NV18	NV18	NV18	NV18	NODE	NODE	SYS	SYS	0-31	0		N/A
+GPU2	NV18	NV18	 X 	NV18	NV18	NV18	NV18	NV18	NODE	NODE	SYS	SYS	0-31	0		N/A
+GPU3	NV18	NV18	NV18	 X 	NV18	NV18	NV18	NV18	PIX	NODE	SYS	SYS	0-31	0		N/A
+GPU4	NV18	NV18	NV18	NV18	 X 	NV18	NV18	NV18	SYS	SYS	NODE	NODE	32-63	1		N/A
+GPU5	NV18	NV18	NV18	NV18	NV18	 X 	NV18	NV18	SYS	SYS	NODE	PIX	32-63	1		N/A
+GPU6	NV18	NV18	NV18	NV18	NV18	NV18	 X 	NV18	SYS	SYS	NODE	NODE	32-63	1		N/A
+GPU7	NV18	NV18	NV18	NV18	NV18	NV18	NV18	 X 	SYS	SYS	PIX	NODE	32-63	1		N/A
+NIC0	NODE	NODE	NODE	PIX	SYS	SYS	SYS	SYS	 X 	NODE	SYS	SYS				
+NIC1	PIX	NODE	NODE	NODE	SYS	SYS	SYS	SYS	NODE	 X 	SYS	SYS				
+NIC2	SYS	SYS	SYS	SYS	NODE	NODE	NODE	PIX	SYS	SYS	 X 	NODE				
+NIC3	SYS	SYS	SYS	SYS	NODE	PIX	NODE	NODE	SYS	SYS	NODE	 X 				
+
+Legend:
+
+  X    = Self
+  SYS  = Connection traversing PCIe as well as the SMP interconnect between NUMA nodes (e.g., QPI/UPI)
+  NODE = Connection traversing PCIe as well as the interconnect between PCIe Host Bridges within a NUMA node
+  PHB  = Connection traversing PCIe as well as a PCIe Host Bridge (typically the CPU)
+  PXB  = Connection traversing multiple PCIe bridges (without traversing the PCIe Host Bridge)
+  PIX  = Connection traversing at most a single PCIe bridge
+  NV#  = Connection traversing a bonded set of # NVLinks
+
+NIC Legend:
+
+  NIC0: mlx5_0
+  NIC1: mlx5_1
+  NIC2: mlx5_2
+  NIC3: mlx5_3
+
+
+## nvcc --version
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2025 NVIDIA Corporation
+Built on Tue_May_27_02:21:03_PDT_2025
+Cuda compilation tools, release 12.9, V12.9.86
+Build cuda_12.9.r12.9/compiler.36037853_0
+
+## mpirun --version
+mpirun (Open MPI) 4.1.9a1
+
+Report bugs to http://www.open-mpi.org/community/help/
+
+## mpifort --version
+
+nvfortran 25.11-0 64-bit target on x86-64 Linux -tp znver5 
+NVIDIA Compilers and Tools
+Copyright (c) 2025, NVIDIA CORPORATION & AFFILIATES.  All rights reserved.
+
+## mpicxx --version
+
+nvc++ 25.11-0 64-bit target on x86-64 Linux -tp znver5 
+NVIDIA Compilers and Tools
+Copyright (c) 2025, NVIDIA CORPORATION & AFFILIATES.  All rights reserved.

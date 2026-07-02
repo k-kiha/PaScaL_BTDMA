@@ -1,0 +1,449 @@
+# PaScaL_BTDMA full Study
+timestamp=260702_193014
+root_dir=/scratch/paop45a01/02_F2C/PaScaL_BTDMA
+script_dir=/scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study
+output_dir=/scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result
+case_matrix=/scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_report_case_matrix.csv
+iterations=10
+cuda_arch=90
+build_before_run=0
+dry_run=1
+
+
+## case 1: sgref_np1_32x32x128_m2_device
+tags=signature;single_gpu_reference;m_sensitivity
+variant=noncyclic np=1 n1=32 n2=32 n3=128 m=2 cxx_mpi_modes=device
+run_fortran=1 run_cxx=1 notes=single_gpu_m2_reference
+CUDA_VISIBLE_DEVICES=0
+running implementation=cuda-cxx mpi_mode=device np=1 n1=32 n2=32 n3=128 m=2 iterations=10
+[dry-run] PASCAL_BTDMA_MPI_MODE=device mpirun -np 1 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_cuda_cxx_btdma_profile 32 32 128 2 10
+running implementation=fortran-original mpi_mode=device np=1 n1=32 n2=32 n3=128 m=2 iterations=10
+[dry-run] mpirun -np 1 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_fortran_btdma_profile 32 32 128 2 10
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/1_sgref_np1_32x32x128_m2_device_environment.txt
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/1_sgref_np1_32x32x128_m2_device_manifest.csv
+
+## case 2: sgref_np1_32x32x128_m3_device
+tags=signature;single_gpu_reference;m_sensitivity
+variant=noncyclic np=1 n1=32 n2=32 n3=128 m=3 cxx_mpi_modes=device
+run_fortran=1 run_cxx=1 notes=single_gpu_m3_reference
+CUDA_VISIBLE_DEVICES=0
+running implementation=cuda-cxx mpi_mode=device np=1 n1=32 n2=32 n3=128 m=3 iterations=10
+[dry-run] PASCAL_BTDMA_MPI_MODE=device mpirun -np 1 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_cuda_cxx_btdma_profile 32 32 128 3 10
+running implementation=fortran-original mpi_mode=device np=1 n1=32 n2=32 n3=128 m=3 iterations=10
+[dry-run] mpirun -np 1 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_fortran_btdma_profile 32 32 128 3 10
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/2_sgref_np1_32x32x128_m3_device_environment.txt
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/2_sgref_np1_32x32x128_m3_device_manifest.csv
+
+## case 3: sgref_np1_32x32x128_m5_device
+tags=signature;single_gpu_reference;m_sensitivity
+variant=noncyclic np=1 n1=32 n2=32 n3=128 m=5 cxx_mpi_modes=device
+run_fortran=1 run_cxx=1 notes=single_gpu_m5_reference
+CUDA_VISIBLE_DEVICES=0
+running implementation=cuda-cxx mpi_mode=device np=1 n1=32 n2=32 n3=128 m=5 iterations=10
+[dry-run] PASCAL_BTDMA_MPI_MODE=device mpirun -np 1 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_cuda_cxx_btdma_profile 32 32 128 5 10
+running implementation=fortran-original mpi_mode=device np=1 n1=32 n2=32 n3=128 m=5 iterations=10
+[dry-run] mpirun -np 1 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_fortran_btdma_profile 32 32 128 5 10
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/3_sgref_np1_32x32x128_m5_device_environment.txt
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/3_sgref_np1_32x32x128_m5_device_manifest.csv
+
+## case 4: sgref_np1_32x32x128_m8_device
+tags=signature;single_gpu_reference;m_sensitivity
+variant=noncyclic np=1 n1=32 n2=32 n3=128 m=8 cxx_mpi_modes=device
+run_fortran=1 run_cxx=1 notes=single_gpu_m8_reference
+CUDA_VISIBLE_DEVICES=0
+running implementation=cuda-cxx mpi_mode=device np=1 n1=32 n2=32 n3=128 m=8 iterations=10
+[dry-run] PASCAL_BTDMA_MPI_MODE=device mpirun -np 1 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_cuda_cxx_btdma_profile 32 32 128 8 10
+running implementation=fortran-original mpi_mode=device np=1 n1=32 n2=32 n3=128 m=8 iterations=10
+[dry-run] mpirun -np 1 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_fortran_btdma_profile 32 32 128 8 10
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/4_sgref_np1_32x32x128_m8_device_environment.txt
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/4_sgref_np1_32x32x128_m8_device_manifest.csv
+
+## case 5: strong_np2_64x64x2048_m2_device
+tags=signature;total_performance;phase_breakdown;fortran_vs_cuda_cxx;strong_scaling;m_sensitivity
+variant=noncyclic np=2 n1=64 n2=64 n3=2048 m=2 cxx_mpi_modes=device
+run_fortran=1 run_cxx=1 notes=strong_m2_2gpu_baseline
+CUDA_VISIBLE_DEVICES=0,1
+running implementation=cuda-cxx mpi_mode=device np=2 n1=64 n2=64 n3=2048 m=2 iterations=10
+[dry-run] PASCAL_BTDMA_MPI_MODE=device mpirun -np 2 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_cuda_cxx_btdma_profile 64 64 2048 2 10
+running implementation=fortran-original mpi_mode=device np=2 n1=64 n2=64 n3=2048 m=2 iterations=10
+[dry-run] mpirun -np 2 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_fortran_btdma_profile 64 64 2048 2 10
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/5_strong_np2_64x64x2048_m2_device_environment.txt
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/5_strong_np2_64x64x2048_m2_device_manifest.csv
+
+## case 6: strong_np4_64x64x2048_m2_device
+tags=signature;total_performance;phase_breakdown;fortran_vs_cuda_cxx;strong_scaling;weak_nrow_scaling;m_sensitivity
+variant=noncyclic np=4 n1=64 n2=64 n3=2048 m=2 cxx_mpi_modes=device
+run_fortran=1 run_cxx=1 notes=strong_m2_4gpu_and_weak_nrow_midpoint
+CUDA_VISIBLE_DEVICES=0,1,2,3
+running implementation=cuda-cxx mpi_mode=device np=4 n1=64 n2=64 n3=2048 m=2 iterations=10
+[dry-run] PASCAL_BTDMA_MPI_MODE=device mpirun -np 4 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_cuda_cxx_btdma_profile 64 64 2048 2 10
+running implementation=fortran-original mpi_mode=device np=4 n1=64 n2=64 n3=2048 m=2 iterations=10
+[dry-run] mpirun -np 4 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_fortran_btdma_profile 64 64 2048 2 10
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/6_strong_np4_64x64x2048_m2_device_environment.txt
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/6_strong_np4_64x64x2048_m2_device_manifest.csv
+
+## case 7: strong_np8_64x64x2048_m2_device
+tags=signature;total_performance;phase_breakdown;fortran_vs_cuda_cxx;strong_scaling;nsys_sensitivity;m_sensitivity
+variant=noncyclic np=8 n1=64 n2=64 n3=2048 m=2 cxx_mpi_modes=device
+run_fortran=1 run_cxx=1 notes=strong_m2_8gpu_and_nsys_midpoint
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+running implementation=cuda-cxx mpi_mode=device np=8 n1=64 n2=64 n3=2048 m=2 iterations=10
+[dry-run] PASCAL_BTDMA_MPI_MODE=device mpirun -np 8 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_cuda_cxx_btdma_profile 64 64 2048 2 10
+running implementation=fortran-original mpi_mode=device np=8 n1=64 n2=64 n3=2048 m=2 iterations=10
+[dry-run] mpirun -np 8 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_fortran_btdma_profile 64 64 2048 2 10
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/7_strong_np8_64x64x2048_m2_device_environment.txt
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/7_strong_np8_64x64x2048_m2_device_manifest.csv
+
+## case 8: strong_np2_64x64x2048_m3_device
+tags=signature;total_performance;phase_breakdown;fortran_vs_cuda_cxx;strong_scaling;m_sensitivity
+variant=noncyclic np=2 n1=64 n2=64 n3=2048 m=3 cxx_mpi_modes=device
+run_fortran=1 run_cxx=1 notes=strong_m3_2gpu_baseline
+CUDA_VISIBLE_DEVICES=0,1
+running implementation=cuda-cxx mpi_mode=device np=2 n1=64 n2=64 n3=2048 m=3 iterations=10
+[dry-run] PASCAL_BTDMA_MPI_MODE=device mpirun -np 2 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_cuda_cxx_btdma_profile 64 64 2048 3 10
+running implementation=fortran-original mpi_mode=device np=2 n1=64 n2=64 n3=2048 m=3 iterations=10
+[dry-run] mpirun -np 2 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_fortran_btdma_profile 64 64 2048 3 10
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/8_strong_np2_64x64x2048_m3_device_environment.txt
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/8_strong_np2_64x64x2048_m3_device_manifest.csv
+
+## case 9: strong_np4_64x64x2048_m3_device
+tags=signature;total_performance;phase_breakdown;fortran_vs_cuda_cxx;strong_scaling;m_sensitivity
+variant=noncyclic np=4 n1=64 n2=64 n3=2048 m=3 cxx_mpi_modes=device
+run_fortran=1 run_cxx=1 notes=strong_m3_4gpu
+CUDA_VISIBLE_DEVICES=0,1,2,3
+running implementation=cuda-cxx mpi_mode=device np=4 n1=64 n2=64 n3=2048 m=3 iterations=10
+[dry-run] PASCAL_BTDMA_MPI_MODE=device mpirun -np 4 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_cuda_cxx_btdma_profile 64 64 2048 3 10
+running implementation=fortran-original mpi_mode=device np=4 n1=64 n2=64 n3=2048 m=3 iterations=10
+[dry-run] mpirun -np 4 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_fortran_btdma_profile 64 64 2048 3 10
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/9_strong_np4_64x64x2048_m3_device_environment.txt
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/9_strong_np4_64x64x2048_m3_device_manifest.csv
+
+## case 10: strong_np8_64x64x2048_m3_device
+tags=signature;total_performance;phase_breakdown;fortran_vs_cuda_cxx;strong_scaling;m_sensitivity
+variant=noncyclic np=8 n1=64 n2=64 n3=2048 m=3 cxx_mpi_modes=device
+run_fortran=1 run_cxx=1 notes=strong_m3_8gpu
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+running implementation=cuda-cxx mpi_mode=device np=8 n1=64 n2=64 n3=2048 m=3 iterations=10
+[dry-run] PASCAL_BTDMA_MPI_MODE=device mpirun -np 8 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_cuda_cxx_btdma_profile 64 64 2048 3 10
+running implementation=fortran-original mpi_mode=device np=8 n1=64 n2=64 n3=2048 m=3 iterations=10
+[dry-run] mpirun -np 8 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_fortran_btdma_profile 64 64 2048 3 10
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/10_strong_np8_64x64x2048_m3_device_environment.txt
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/10_strong_np8_64x64x2048_m3_device_manifest.csv
+
+## case 11: strong_np2_64x64x2048_m5_device
+tags=signature;total_performance;phase_breakdown;fortran_vs_cuda_cxx;strong_scaling;m_sensitivity;central_case;mpi_mode_device_reference
+variant=noncyclic np=2 n1=64 n2=64 n3=2048 m=5 cxx_mpi_modes=device
+run_fortran=1 run_cxx=1 notes=central_m5_2gpu_baseline
+CUDA_VISIBLE_DEVICES=0,1
+running implementation=cuda-cxx mpi_mode=device np=2 n1=64 n2=64 n3=2048 m=5 iterations=10
+[dry-run] PASCAL_BTDMA_MPI_MODE=device mpirun -np 2 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_cuda_cxx_btdma_profile 64 64 2048 5 10
+running implementation=fortran-original mpi_mode=device np=2 n1=64 n2=64 n3=2048 m=5 iterations=10
+[dry-run] mpirun -np 2 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_fortran_btdma_profile 64 64 2048 5 10
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/11_strong_np2_64x64x2048_m5_device_environment.txt
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/11_strong_np2_64x64x2048_m5_device_manifest.csv
+
+## case 12: strong_np4_64x64x2048_m5_device
+tags=signature;total_performance;phase_breakdown;fortran_vs_cuda_cxx;strong_scaling;weak_nrow_scaling;m_sensitivity;central_case;mpi_mode_device_reference
+variant=noncyclic np=4 n1=64 n2=64 n3=2048 m=5 cxx_mpi_modes=device
+run_fortran=1 run_cxx=1 notes=central_m5_4gpu_and_weak_nrow_midpoint
+CUDA_VISIBLE_DEVICES=0,1,2,3
+running implementation=cuda-cxx mpi_mode=device np=4 n1=64 n2=64 n3=2048 m=5 iterations=10
+[dry-run] PASCAL_BTDMA_MPI_MODE=device mpirun -np 4 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_cuda_cxx_btdma_profile 64 64 2048 5 10
+running implementation=fortran-original mpi_mode=device np=4 n1=64 n2=64 n3=2048 m=5 iterations=10
+[dry-run] mpirun -np 4 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_fortran_btdma_profile 64 64 2048 5 10
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/12_strong_np4_64x64x2048_m5_device_environment.txt
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/12_strong_np4_64x64x2048_m5_device_manifest.csv
+
+## case 13: strong_np8_64x64x2048_m5_device
+tags=signature;total_performance;phase_breakdown;fortran_vs_cuda_cxx;strong_scaling;nsys_sensitivity;m_sensitivity;central_case;mpi_mode_device_reference
+variant=noncyclic np=8 n1=64 n2=64 n3=2048 m=5 cxx_mpi_modes=device
+run_fortran=1 run_cxx=1 notes=central_m5_8gpu_and_nsys_midpoint
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+running implementation=cuda-cxx mpi_mode=device np=8 n1=64 n2=64 n3=2048 m=5 iterations=10
+[dry-run] PASCAL_BTDMA_MPI_MODE=device mpirun -np 8 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_cuda_cxx_btdma_profile 64 64 2048 5 10
+running implementation=fortran-original mpi_mode=device np=8 n1=64 n2=64 n3=2048 m=5 iterations=10
+[dry-run] mpirun -np 8 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_fortran_btdma_profile 64 64 2048 5 10
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/13_strong_np8_64x64x2048_m5_device_environment.txt
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/13_strong_np8_64x64x2048_m5_device_manifest.csv
+
+## case 14: strong_np2_64x64x2048_m8_device
+tags=signature;total_performance;phase_breakdown;fortran_vs_cuda_cxx;strong_scaling;m_sensitivity
+variant=noncyclic np=2 n1=64 n2=64 n3=2048 m=8 cxx_mpi_modes=device
+run_fortran=1 run_cxx=1 notes=strong_m8_2gpu_baseline
+CUDA_VISIBLE_DEVICES=0,1
+running implementation=cuda-cxx mpi_mode=device np=2 n1=64 n2=64 n3=2048 m=8 iterations=10
+[dry-run] PASCAL_BTDMA_MPI_MODE=device mpirun -np 2 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_cuda_cxx_btdma_profile 64 64 2048 8 10
+running implementation=fortran-original mpi_mode=device np=2 n1=64 n2=64 n3=2048 m=8 iterations=10
+[dry-run] mpirun -np 2 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_fortran_btdma_profile 64 64 2048 8 10
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/14_strong_np2_64x64x2048_m8_device_environment.txt
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/14_strong_np2_64x64x2048_m8_device_manifest.csv
+
+## case 15: strong_np4_64x64x2048_m8_device
+tags=signature;total_performance;phase_breakdown;fortran_vs_cuda_cxx;strong_scaling;weak_nrow_scaling;m_sensitivity
+variant=noncyclic np=4 n1=64 n2=64 n3=2048 m=8 cxx_mpi_modes=device
+run_fortran=1 run_cxx=1 notes=strong_m8_4gpu_and_weak_nrow_midpoint
+CUDA_VISIBLE_DEVICES=0,1,2,3
+running implementation=cuda-cxx mpi_mode=device np=4 n1=64 n2=64 n3=2048 m=8 iterations=10
+[dry-run] PASCAL_BTDMA_MPI_MODE=device mpirun -np 4 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_cuda_cxx_btdma_profile 64 64 2048 8 10
+running implementation=fortran-original mpi_mode=device np=4 n1=64 n2=64 n3=2048 m=8 iterations=10
+[dry-run] mpirun -np 4 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_fortran_btdma_profile 64 64 2048 8 10
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/15_strong_np4_64x64x2048_m8_device_environment.txt
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/15_strong_np4_64x64x2048_m8_device_manifest.csv
+
+## case 16: strong_np8_64x64x2048_m8_device
+tags=signature;total_performance;phase_breakdown;fortran_vs_cuda_cxx;strong_scaling;nsys_sensitivity;m_sensitivity
+variant=noncyclic np=8 n1=64 n2=64 n3=2048 m=8 cxx_mpi_modes=device
+run_fortran=1 run_cxx=1 notes=strong_m8_8gpu_and_nsys_midpoint
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+running implementation=cuda-cxx mpi_mode=device np=8 n1=64 n2=64 n3=2048 m=8 iterations=10
+[dry-run] PASCAL_BTDMA_MPI_MODE=device mpirun -np 8 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_cuda_cxx_btdma_profile 64 64 2048 8 10
+running implementation=fortran-original mpi_mode=device np=8 n1=64 n2=64 n3=2048 m=8 iterations=10
+[dry-run] mpirun -np 8 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_fortran_btdma_profile 64 64 2048 8 10
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/16_strong_np8_64x64x2048_m8_device_environment.txt
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/16_strong_np8_64x64x2048_m8_device_manifest.csv
+
+## case 17: weak_nrow_np2_64x64x1024_m2_device
+tags=signature;total_performance;phase_breakdown;fortran_vs_cuda_cxx;weak_nrow_scaling;nrow_sensitivity
+variant=noncyclic np=2 n1=64 n2=64 n3=1024 m=2 cxx_mpi_modes=device
+run_fortran=1 run_cxx=1 notes=weak_nrow_m2_local_nrow_512_at_2gpu
+CUDA_VISIBLE_DEVICES=0,1
+running implementation=cuda-cxx mpi_mode=device np=2 n1=64 n2=64 n3=1024 m=2 iterations=10
+[dry-run] PASCAL_BTDMA_MPI_MODE=device mpirun -np 2 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_cuda_cxx_btdma_profile 64 64 1024 2 10
+running implementation=fortran-original mpi_mode=device np=2 n1=64 n2=64 n3=1024 m=2 iterations=10
+[dry-run] mpirun -np 2 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_fortran_btdma_profile 64 64 1024 2 10
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/17_weak_nrow_np2_64x64x1024_m2_device_environment.txt
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/17_weak_nrow_np2_64x64x1024_m2_device_manifest.csv
+
+## case 18: weak_nrow_np8_64x64x4096_m2_device
+tags=signature;total_performance;phase_breakdown;fortran_vs_cuda_cxx;weak_nrow_scaling;nrow_sensitivity
+variant=noncyclic np=8 n1=64 n2=64 n3=4096 m=2 cxx_mpi_modes=device
+run_fortran=1 run_cxx=1 notes=weak_nrow_m2_local_nrow_512_at_8gpu
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+running implementation=cuda-cxx mpi_mode=device np=8 n1=64 n2=64 n3=4096 m=2 iterations=10
+[dry-run] PASCAL_BTDMA_MPI_MODE=device mpirun -np 8 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_cuda_cxx_btdma_profile 64 64 4096 2 10
+running implementation=fortran-original mpi_mode=device np=8 n1=64 n2=64 n3=4096 m=2 iterations=10
+[dry-run] mpirun -np 8 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_fortran_btdma_profile 64 64 4096 2 10
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/18_weak_nrow_np8_64x64x4096_m2_device_environment.txt
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/18_weak_nrow_np8_64x64x4096_m2_device_manifest.csv
+
+## case 19: weak_nrow_np2_64x64x1024_m5_device
+tags=signature;total_performance;phase_breakdown;fortran_vs_cuda_cxx;weak_nrow_scaling;nrow_sensitivity
+variant=noncyclic np=2 n1=64 n2=64 n3=1024 m=5 cxx_mpi_modes=device
+run_fortran=1 run_cxx=1 notes=weak_nrow_m5_local_nrow_512_at_2gpu
+CUDA_VISIBLE_DEVICES=0,1
+running implementation=cuda-cxx mpi_mode=device np=2 n1=64 n2=64 n3=1024 m=5 iterations=10
+[dry-run] PASCAL_BTDMA_MPI_MODE=device mpirun -np 2 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_cuda_cxx_btdma_profile 64 64 1024 5 10
+running implementation=fortran-original mpi_mode=device np=2 n1=64 n2=64 n3=1024 m=5 iterations=10
+[dry-run] mpirun -np 2 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_fortran_btdma_profile 64 64 1024 5 10
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/19_weak_nrow_np2_64x64x1024_m5_device_environment.txt
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/19_weak_nrow_np2_64x64x1024_m5_device_manifest.csv
+
+## case 20: weak_nrow_np8_64x64x4096_m5_device
+tags=signature;total_performance;phase_breakdown;fortran_vs_cuda_cxx;weak_nrow_scaling;nrow_sensitivity
+variant=noncyclic np=8 n1=64 n2=64 n3=4096 m=5 cxx_mpi_modes=device
+run_fortran=1 run_cxx=1 notes=weak_nrow_m5_local_nrow_512_at_8gpu
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+running implementation=cuda-cxx mpi_mode=device np=8 n1=64 n2=64 n3=4096 m=5 iterations=10
+[dry-run] PASCAL_BTDMA_MPI_MODE=device mpirun -np 8 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_cuda_cxx_btdma_profile 64 64 4096 5 10
+running implementation=fortran-original mpi_mode=device np=8 n1=64 n2=64 n3=4096 m=5 iterations=10
+[dry-run] mpirun -np 8 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_fortran_btdma_profile 64 64 4096 5 10
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/20_weak_nrow_np8_64x64x4096_m5_device_environment.txt
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/20_weak_nrow_np8_64x64x4096_m5_device_manifest.csv
+
+## case 21: weak_nrow_np2_64x64x1024_m8_device
+tags=signature;total_performance;phase_breakdown;fortran_vs_cuda_cxx;weak_nrow_scaling;nrow_sensitivity
+variant=noncyclic np=2 n1=64 n2=64 n3=1024 m=8 cxx_mpi_modes=device
+run_fortran=1 run_cxx=1 notes=weak_nrow_m8_local_nrow_512_at_2gpu
+CUDA_VISIBLE_DEVICES=0,1
+running implementation=cuda-cxx mpi_mode=device np=2 n1=64 n2=64 n3=1024 m=8 iterations=10
+[dry-run] PASCAL_BTDMA_MPI_MODE=device mpirun -np 2 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_cuda_cxx_btdma_profile 64 64 1024 8 10
+running implementation=fortran-original mpi_mode=device np=2 n1=64 n2=64 n3=1024 m=8 iterations=10
+[dry-run] mpirun -np 2 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_fortran_btdma_profile 64 64 1024 8 10
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/21_weak_nrow_np2_64x64x1024_m8_device_environment.txt
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/21_weak_nrow_np2_64x64x1024_m8_device_manifest.csv
+
+## case 22: weak_nrow_np8_64x64x4096_m8_device
+tags=signature;total_performance;phase_breakdown;fortran_vs_cuda_cxx;weak_nrow_scaling;nrow_sensitivity
+variant=noncyclic np=8 n1=64 n2=64 n3=4096 m=8 cxx_mpi_modes=device
+run_fortran=1 run_cxx=1 notes=weak_nrow_m8_local_nrow_512_at_8gpu
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+running implementation=cuda-cxx mpi_mode=device np=8 n1=64 n2=64 n3=4096 m=8 iterations=10
+[dry-run] PASCAL_BTDMA_MPI_MODE=device mpirun -np 8 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_cuda_cxx_btdma_profile 64 64 4096 8 10
+running implementation=fortran-original mpi_mode=device np=8 n1=64 n2=64 n3=4096 m=8 iterations=10
+[dry-run] mpirun -np 8 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_fortran_btdma_profile 64 64 4096 8 10
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/22_weak_nrow_np8_64x64x4096_m8_device_environment.txt
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/22_weak_nrow_np8_64x64x4096_m8_device_manifest.csv
+
+## case 23: nsys_np8_32x32x2048_m2_device
+tags=signature;total_performance;phase_breakdown;fortran_vs_cuda_cxx;nsys_sensitivity
+variant=noncyclic np=8 n1=32 n2=32 n3=2048 m=2 cxx_mpi_modes=device
+run_fortran=1 run_cxx=1 notes=nsys_small_m2_at_8gpu
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+running implementation=cuda-cxx mpi_mode=device np=8 n1=32 n2=32 n3=2048 m=2 iterations=10
+[dry-run] PASCAL_BTDMA_MPI_MODE=device mpirun -np 8 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_cuda_cxx_btdma_profile 32 32 2048 2 10
+running implementation=fortran-original mpi_mode=device np=8 n1=32 n2=32 n3=2048 m=2 iterations=10
+[dry-run] mpirun -np 8 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_fortran_btdma_profile 32 32 2048 2 10
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/23_nsys_np8_32x32x2048_m2_device_environment.txt
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/23_nsys_np8_32x32x2048_m2_device_manifest.csv
+
+## case 24: nsys_np8_128x128x2048_m2_device
+tags=signature;total_performance;phase_breakdown;fortran_vs_cuda_cxx;nsys_sensitivity
+variant=noncyclic np=8 n1=128 n2=128 n3=2048 m=2 cxx_mpi_modes=device
+run_fortran=1 run_cxx=1 notes=nsys_large_m2_at_8gpu
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+running implementation=cuda-cxx mpi_mode=device np=8 n1=128 n2=128 n3=2048 m=2 iterations=10
+[dry-run] PASCAL_BTDMA_MPI_MODE=device mpirun -np 8 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_cuda_cxx_btdma_profile 128 128 2048 2 10
+running implementation=fortran-original mpi_mode=device np=8 n1=128 n2=128 n3=2048 m=2 iterations=10
+[dry-run] mpirun -np 8 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_fortran_btdma_profile 128 128 2048 2 10
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/24_nsys_np8_128x128x2048_m2_device_environment.txt
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/24_nsys_np8_128x128x2048_m2_device_manifest.csv
+
+## case 25: nsys_np8_32x32x2048_m5_device
+tags=signature;total_performance;phase_breakdown;fortran_vs_cuda_cxx;nsys_sensitivity
+variant=noncyclic np=8 n1=32 n2=32 n3=2048 m=5 cxx_mpi_modes=device
+run_fortran=1 run_cxx=1 notes=nsys_small_m5_at_8gpu
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+running implementation=cuda-cxx mpi_mode=device np=8 n1=32 n2=32 n3=2048 m=5 iterations=10
+[dry-run] PASCAL_BTDMA_MPI_MODE=device mpirun -np 8 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_cuda_cxx_btdma_profile 32 32 2048 5 10
+running implementation=fortran-original mpi_mode=device np=8 n1=32 n2=32 n3=2048 m=5 iterations=10
+[dry-run] mpirun -np 8 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_fortran_btdma_profile 32 32 2048 5 10
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/25_nsys_np8_32x32x2048_m5_device_environment.txt
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/25_nsys_np8_32x32x2048_m5_device_manifest.csv
+
+## case 26: nsys_np8_128x128x2048_m5_device
+tags=signature;total_performance;phase_breakdown;fortran_vs_cuda_cxx;nsys_sensitivity
+variant=noncyclic np=8 n1=128 n2=128 n3=2048 m=5 cxx_mpi_modes=device
+run_fortran=1 run_cxx=1 notes=nsys_large_m5_at_8gpu
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+running implementation=cuda-cxx mpi_mode=device np=8 n1=128 n2=128 n3=2048 m=5 iterations=10
+[dry-run] PASCAL_BTDMA_MPI_MODE=device mpirun -np 8 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_cuda_cxx_btdma_profile 128 128 2048 5 10
+running implementation=fortran-original mpi_mode=device np=8 n1=128 n2=128 n3=2048 m=5 iterations=10
+[dry-run] mpirun -np 8 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_fortran_btdma_profile 128 128 2048 5 10
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/26_nsys_np8_128x128x2048_m5_device_environment.txt
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/26_nsys_np8_128x128x2048_m5_device_manifest.csv
+
+## case 27: nsys_np8_32x32x2048_m8_device
+tags=signature;total_performance;phase_breakdown;fortran_vs_cuda_cxx;nsys_sensitivity
+variant=noncyclic np=8 n1=32 n2=32 n3=2048 m=8 cxx_mpi_modes=device
+run_fortran=1 run_cxx=1 notes=nsys_small_m8_at_8gpu
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+running implementation=cuda-cxx mpi_mode=device np=8 n1=32 n2=32 n3=2048 m=8 iterations=10
+[dry-run] PASCAL_BTDMA_MPI_MODE=device mpirun -np 8 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_cuda_cxx_btdma_profile 32 32 2048 8 10
+running implementation=fortran-original mpi_mode=device np=8 n1=32 n2=32 n3=2048 m=8 iterations=10
+[dry-run] mpirun -np 8 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_fortran_btdma_profile 32 32 2048 8 10
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/27_nsys_np8_32x32x2048_m8_device_environment.txt
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/27_nsys_np8_32x32x2048_m8_device_manifest.csv
+
+## case 28: nsys_np8_128x128x2048_m8_device
+tags=signature;total_performance;phase_breakdown;fortran_vs_cuda_cxx;nsys_sensitivity
+variant=noncyclic np=8 n1=128 n2=128 n3=2048 m=8 cxx_mpi_modes=device
+run_fortran=1 run_cxx=1 notes=nsys_large_m8_at_8gpu
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+running implementation=cuda-cxx mpi_mode=device np=8 n1=128 n2=128 n3=2048 m=8 iterations=10
+[dry-run] PASCAL_BTDMA_MPI_MODE=device mpirun -np 8 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_cuda_cxx_btdma_profile 128 128 2048 8 10
+running implementation=fortran-original mpi_mode=device np=8 n1=128 n2=128 n3=2048 m=8 iterations=10
+[dry-run] mpirun -np 8 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_fortran_btdma_profile 128 128 2048 8 10
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/28_nsys_np8_128x128x2048_m8_device_environment.txt
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/28_nsys_np8_128x128x2048_m8_device_manifest.csv
+
+## case 29: mpi_host_np2_64x64x2048_m5_host
+tags=signature;total_performance;phase_breakdown;mpi_mode_comparison;host_fallback
+variant=noncyclic np=2 n1=64 n2=64 n3=2048 m=5 cxx_mpi_modes=host
+run_fortran=0 run_cxx=1 notes=cuda_cxx_host_fallback_2gpu
+CUDA_VISIBLE_DEVICES=0,1
+running implementation=cuda-cxx mpi_mode=host np=2 n1=64 n2=64 n3=2048 m=5 iterations=10
+[dry-run] PASCAL_BTDMA_MPI_MODE=host mpirun -np 2 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_cuda_cxx_btdma_profile 64 64 2048 5 10
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/29_mpi_host_np2_64x64x2048_m5_host_environment.txt
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/29_mpi_host_np2_64x64x2048_m5_host_manifest.csv
+
+## case 30: mpi_host_np4_64x64x2048_m5_host
+tags=signature;total_performance;phase_breakdown;mpi_mode_comparison;host_fallback
+variant=noncyclic np=4 n1=64 n2=64 n3=2048 m=5 cxx_mpi_modes=host
+run_fortran=0 run_cxx=1 notes=cuda_cxx_host_fallback_4gpu
+CUDA_VISIBLE_DEVICES=0,1,2,3
+running implementation=cuda-cxx mpi_mode=host np=4 n1=64 n2=64 n3=2048 m=5 iterations=10
+[dry-run] PASCAL_BTDMA_MPI_MODE=host mpirun -np 4 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_cuda_cxx_btdma_profile 64 64 2048 5 10
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/30_mpi_host_np4_64x64x2048_m5_host_environment.txt
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/30_mpi_host_np4_64x64x2048_m5_host_manifest.csv
+
+## case 31: mpi_host_np8_64x64x2048_m5_host
+tags=signature;total_performance;phase_breakdown;mpi_mode_comparison;host_fallback
+variant=noncyclic np=8 n1=64 n2=64 n3=2048 m=5 cxx_mpi_modes=host
+run_fortran=0 run_cxx=1 notes=cuda_cxx_host_fallback_8gpu
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+running implementation=cuda-cxx mpi_mode=host np=8 n1=64 n2=64 n3=2048 m=5 iterations=10
+[dry-run] PASCAL_BTDMA_MPI_MODE=host mpirun -np 8 /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/example_cuda_cxx_btdma_profile 64 64 2048 5 10
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193014.csv
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/31_mpi_host_np8_64x64x2048_m5_host_environment.txt
+wrote /scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files/31_mpi_host_np8_64x64x2048_m5_host_manifest.csv
+
+completed full Study wrapper
+case rows=31
+implementation runs=59
+timing_csv=/scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_total_profile_260702_193014.csv
+signature_csv=/scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_solution_signature_260702_193014.csv
+environment_file=/scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_environment_260702_193014.txt
+case_list=/scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_case_list_260702_193014.csv
+case_files_dir=/scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014_case_files
+run_log=/scratch/paop45a01/02_F2C/PaScaL_BTDMA/Study/result/btdma_full_study_260702_193014.log

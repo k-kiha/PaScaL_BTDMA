@@ -1,0 +1,2 @@
+study_suite,case_id,variant,nranks,n1,n2,n3,m,baseline_nranks,scaling_kind,cxx_mpi_modes,notes
+custom,custom_np8_32x32x2048_m2,noncyclic,8,32,32,2048,2,2,custom,device,user_supplied_case
